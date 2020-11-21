@@ -98,9 +98,7 @@ class ArticlesControllerTest extends TestCase
 
         $response->assertSuccessful();
 
-        $this->assertDatabaseHas('articles', [
-            'user_id' => $user->id,
-        ]);
+        $this->assertDatabaseCount('articles', 5);
     }
 
     public function testShowArticle(): void
