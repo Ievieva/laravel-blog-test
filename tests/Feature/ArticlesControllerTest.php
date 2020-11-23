@@ -88,13 +88,13 @@ class ArticlesControllerTest extends TestCase
 
         $this->followingRedirects();
 
-        $articles = Article::factory()
+        Article::factory()
             ->count(5)
             ->create([
-            'user_id' => $user->id
-        ]);
+                'user_id' => $user->id
+            ]);
 
-        $response = $this->post(route('articles.index'), $articles);
+        $response = $this->get(route('articles.index'));
 
         $response->assertSuccessful();
 
@@ -114,7 +114,7 @@ class ArticlesControllerTest extends TestCase
             'content' => 'Example content'
         ]);
 
-        $response = $this->post(route('articles.show'), $article);
+        $response = $this->get(route('articles.show', $article));
 
         $response->assertSuccessful();
 
@@ -136,13 +136,9 @@ class ArticlesControllerTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $response = $this->post(route('articles.edit'), $article);
+        $response = $this->get(route('articles.edit', $article));
 
         $response->assertSuccessful();
-
-        $this->assertDatabaseHas('articles', [
-            'user_id' => $user->id,
-        ]);
     }
 
     public function testUpdateArticle(): void
@@ -158,7 +154,7 @@ class ArticlesControllerTest extends TestCase
             'content' => 'Example content'
         ]);
 
-        $response = $this->post(route('articles.update'), $article);
+        $response = $this->put(route('articles.update', $article));
 
         $response->assertSuccessful();
 
@@ -169,3 +165,4 @@ class ArticlesControllerTest extends TestCase
         ]);
     }
 }
+
