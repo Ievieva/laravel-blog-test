@@ -11,4 +11,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('articles', 'ArticlesController');
+Route::resource('/articles', 'App\Http\Controllers\ArticlesController');
