@@ -23,7 +23,7 @@ class ArticlesControllerTest extends TestCase
             'content' => 'Example content'
         ]);
 
-        $response->assertSuccessful();
+        $response->assertStatus(200);
 
         $this->assertDatabaseHas('articles', [
             'user_id' => $user->id,
@@ -51,7 +51,7 @@ class ArticlesControllerTest extends TestCase
 
         $response = $this->delete(route('articles.destroy', $article));
 
-        $response->assertSuccessful();
+        $response->assertStatus(200);
 
         $this->assertDatabaseMissing('articles', [
             'user_id' => $user->id,
@@ -72,7 +72,7 @@ class ArticlesControllerTest extends TestCase
             'content' => 'Example content'
         ]);
 
-        $response->assertSuccessful();
+        $response->assertStatus(200);
 
         $this->assertDatabaseHas('articles', [
             'user_id' => $user->id,
@@ -96,7 +96,7 @@ class ArticlesControllerTest extends TestCase
 
         $response = $this->get(route('articles.index'));
 
-        $response->assertSuccessful();
+        $response->assertStatus(200);
 
         $this->assertDatabaseCount('articles', 5);
     }
@@ -116,7 +116,7 @@ class ArticlesControllerTest extends TestCase
 
         $response = $this->get(route('articles.show', $article));
 
-        $response->assertSuccessful();
+        $response->assertStatus(200);
 
         $this->assertDatabaseHas('articles', [
             'user_id' => $user->id,
@@ -138,7 +138,7 @@ class ArticlesControllerTest extends TestCase
 
         $response = $this->get(route('articles.edit', $article));
 
-        $response->assertSuccessful();
+        $response->assertStatus(200);
     }
 
     public function testUpdateArticle(): void
@@ -156,9 +156,10 @@ class ArticlesControllerTest extends TestCase
 
         $response = $this->put(route('articles.update', $article));
 
-        $response->assertSuccessful();
+        $response->assertStatus(200);
 
         $this->assertDatabaseHas('articles', [
+            'id' => $article->id,
             'user_id' => $user->id,
             'title' => 'Example title',
             'content' => 'Example content'
