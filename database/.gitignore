@@ -1,0 +1,5 @@
+*.sqlite
+*.sqlite-journal
+.idea/
+vendor/
+.env
